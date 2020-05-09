@@ -25,7 +25,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">
+          <a class="navbar-brand">
             <img src="nytimesw.png" width="150" alt="NY Times">
           </a>
         </div>
@@ -45,12 +45,13 @@
           <h3 class="text-center">Search for some breaking news over the world <br>OR just press the search icon to get the general news</h5>
           <div class="searchbar">
             <input class="search_input" type="text" placeholder="e.g. election" v-model="query">
-            <a @click="retreive(query,'0')" class="search_icon"><i class="fas fa-search"></i></a>
+            <a @click="retreive(query,0)" class="search_icon"><i class="fas fa-search"></i></a>
           </div>
           
           <div v-if="results.length != 0">
             <br>
             <h4 class="sub-header">Here are the <span v-if="query.length == 0">general news</span> <span v-else>search results for "{{ query }}"</span></h4>
+            <p style="text-align: right;">Page: {{page+1}}</p>
             <div class="table-responsive" style="font-size: small;">
               <table class="table table-striped">
                 <thead>
@@ -72,8 +73,28 @@
                   </tr>
                 </tbody>
               </table>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                  <li class="page-item">
+                    <a class="page-link" @click="retreive(query,page-1)">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,0)">1</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,1)">2</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,2)">3</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,3)">4</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,4)">5</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,5)">6</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,6)">7</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,7)">8</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,8)">9</a></li>
+                  <li class="page-item"><a class="page-link" @click="retreive(query,9)">10</a></li>
+                  <li class="page-item">
+                    <a class="page-link" @click="retreive(query,page+1)">Next</a>
+                  </li>
+                </ul>
+              </nav>
             </div>
-            <canvas id="myChart" width="200px" height="50px"></canvas>
+            <!-- <canvas id="myChart" width="200px" height="50px"></canvas> -->
           </div>
 
           <div v-else-if="loading" class="text-center">

@@ -15,6 +15,10 @@ a {
   border: 0;
 }
 
+.active {
+  background-color: blue!important;
+}
+
 .searchbar {
   margin-bottom: auto;
   margin-top: auto;

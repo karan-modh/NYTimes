@@ -17,13 +17,15 @@ const vm = new Vue({
     el: '#app',
     data: {
         results: [],
+        // mapData: [],
         hits: "",
         loading: false,
         query: "",
-        page: "0",
+        page: 0,
     },
     methods: {
         retreive: function (query,page){
+            if(page<0){page=0;}
             this.loaded = false;
             this.loading = true;
             this.results=[];
@@ -31,7 +33,7 @@ const vm = new Vue({
             this.query = query;
             var qendp = "q=" + query;
             this.page = page;
-            var pag = "page=" + page;
+            var pag = "page=" + page.toString();
             var url;
             if(query==""){
                 qendp="";
@@ -48,6 +50,7 @@ const vm = new Vue({
                 this.loading = false;
                 this.loaded = true;
             }).catch( error => { console.log(error);});
+            // this.generateData(url);
         },
         dateformat: function (date){
             var year = date.slice(0,4);
@@ -55,32 +58,43 @@ const vm = new Vue({
             var day = date.slice(8,10);
             date = day + "-" + mon + "-" + year;
             return date;
-        },        
+        },
+        // generateData: function(url){
+        //     for(let i=0;i<YEARS.length;i++){
+        //         var fq = "fq=pub_year:(" + YEARS[i] + ")";
+        //         var tempurl = buildUrl(url,fq);
+        //         axios.get(tempurl).then(response => {
+        //             const data = response.data.response.meta;
+        //             this.mapData.push(data.hits);
+        //         }).catch(error => { console.log(error)});
+        //     }
+        // }
     }
 });
 
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data:{
-        labels: YEARS,
-        datasets: [{
-            label: '# of Publications',
-            data: [10,20,30,40,50,30,45,20,35,15],
-        }]
-    },
-    options: {
-        elements: {
-            line: {
-                cubicInterpolationMode: 'monotone',
-            }
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
+// var ctx = document.getElementById('myChart');
+// var myChart = new Chart(ctx, {
+//     type: 'line',
+//     data:{
+//         labels: YEARS,
+//         datasets: [{
+//             label: '# of Publications',
+//             data: vm.data.mapData,
+//         }]
+//     },
+//     // [10,20,30,40,50,30,45,20,35,15]
+//     options: {
+//         elements: {
+//             line: {
+//                 cubicInterpolationMode: 'monotone',
+//             }
+//         },
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero: true
+//                 }
+//             }]
+//         }
+//     }
+// });
