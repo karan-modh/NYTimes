@@ -44,7 +44,7 @@
 
           <h3 class="text-center">Search for some breaking news over the world <br>OR just press the search icon to get the general news</h5>
           <div class="searchbar">
-            <input class="search_input" type="text" placeholder="e.g. election" v-model="query">
+            <input class="search_input" type="text" placeholder="e.g. election" v-model="query" v-on:keyup.enter="retreive(query,0)">
             <a @click="retreive(query,0)" class="search_icon"><i class="fas fa-search"></i></a>
           </div>
           
