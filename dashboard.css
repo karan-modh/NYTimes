@@ -72,6 +72,11 @@ a {
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
+  
+  #myTable {
+    table-layout: fixed;
+    width: 100%;
+  }
 
   #cell {
     white-space: pre-line;

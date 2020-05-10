@@ -20,6 +20,7 @@ const mv = new Vue({
 const vm = new Vue({
     el: '#app',
     data: {
+        chartGen: false,
         results: [],
         hits: "",
         searched: "",
@@ -66,6 +67,7 @@ const vm = new Vue({
         },
         generateData:async function (url){
             await sleep(6000);
+            this.chartGen = true;
             console.log("In generateData func after 6secs.");
             for(let i=0;i<YEARS.length;i++){
                 console.log("inside for loop");
@@ -76,7 +78,8 @@ const vm = new Vue({
                     this.mapData.push(data.hits);
                 }).catch(error => { bar.log(error)});
                 await sleep(6000);
-            }        
+            }
+            this.chartGen = false;
             var ctx = document.getElementById('myChart');
             var myChart = new Chart(ctx, {
                 type: 'line',
