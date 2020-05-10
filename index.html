@@ -50,26 +50,26 @@
           
           <div v-if="results.length != 0">
             <br>
-            <h4 class="sub-header">Here are the <span v-if="query.length == 0">general news</span> <span v-else>search results for "{{ query }}"</span></h4>
+            <h4 class="sub-header">Here are the <span v-if="searched==''">general news</span> <span v-else>search results for "{{ searched }}"</span></h4>
             <p style="text-align: right;">Page: {{page+1}}</p>
             <div class="table-responsive" style="font-size: small;">
-              <table class="table table-striped">
+              <table class="table table-striped" style="table-layout: fixed; width: 100%;">
                 <thead>
                   <tr>
-                    <th style="width: 11%;">Date</th>
-                    <th>Headline</th>
-                    <th>Summary</th>
-                    <th>URL</th>
+                    <th style="width: 10%;">Date</th>
+                    <th style="width: 20%;">Headline</th>
+                    <th style="width: 33%;">Summary</th>
+                    <th style="width: 25%;">URL</th>
                     <th style="width: 11%;">Source</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="result in results">
-                    <td>{{ dateformat(result.pub_date) }}</td>
-                    <td>{{ result.headline.main }}</td>
-                    <td>{{ result.abstract }}</td>
-                    <td>{{ result.web_url }}</td>
-                    <td>{{ result.source }}</td>
+                    <td id="cell">{{ dateformat(result.pub_date) }}</td>
+                    <td id="cell">{{ result.headline.main }}</td>
+                    <td id="cell">{{ result.abstract }}</td>
+                    <td id="cell">{{ result.web_url }}</td>
+                    <td id="cell">{{ result.source }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -94,7 +94,9 @@
                 </ul>
               </nav>
             </div>
-            <!-- <canvas id="myChart" width="200px" height="50px"></canvas> -->
+            <br>
+            <canvas id="myChart" width="200px" height="50px"></canvas>
+            
           </div>
 
           <div v-else-if="loading" class="text-center">
